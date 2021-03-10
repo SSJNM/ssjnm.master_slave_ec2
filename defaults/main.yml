@@ -1,0 +1,21 @@
+
+
+## default variables for ssjnm.master_slave_ec2
+
+#Normally we want only a single master node
+master_node_count: 1
+slaves_node_count: 3
+
+#The following is AMI-ID of RedHat image
+ami_id: ami-052c08d70def0ac62
+
+#It is recommended to use instance type better than t2.micro to avoid any setup failure
+master_instance_type: t2.small
+slaves_instance_type: t2.small
+
+#The default name for master node and slave nodes
+master_node_name: KubeMaster
+slave_nodes_name: KubeSlaves
+
+#Considering we live in India so Mumbai is the nearest datacenter
+region: ap-south-1

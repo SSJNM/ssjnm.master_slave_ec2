@@ -1,0 +1,33 @@
+---
+## vars file for ssjnm.master_slave_ec2
+
+
+###Important Variables without which the role won't run
+
+# Replace the foo with your key name to be attached with master and slave
+aws_master_key_name: aws_cloud_key
+aws_slaves_key_name: aws_cloud_key
+
+# Replace the foo with the subnet-id on which you want to launch instances of master and slave bothy
+your_subnet_id: subnet-51fec439
+
+
+## default variables for ssjnm.master_slave_ec2
+
+#Normally we want only a single master node
+#master_node_count: 1
+#slaves_node_count: 3
+
+#The following is AMI-ID of RedHat image
+#ami_id: ami-052c08d70def0ac62
+
+#It is recommended to use instance type better than t2.micro to avoid any setup failure
+#master_instance_type: t2.small
+#slaves_instance_type: t2.small
+
+#The default name for master node and slave nodes
+#master_node_name: KubeMaster
+#slave_nodes_name: KubeSlaves
+
+#Considering we live in India so Mumbai is the nearest datacenter
+#region: ap-south-1

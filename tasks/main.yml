@@ -1,0 +1,45 @@
+---
+#tasks file for ssjnm.master_slave_ec2_launch
+
+#Launching three instances in AWS cloud
+
+- name: EC2 instance for Kubernetes Master
+  ec2:
+    assign_public_ip: yes
+    count: "{{ master_node_count }}"
+    group: "default"
+    image: "{{ ami_id }}" 
+    instance_type: "{{ master_instance_type }}"
+    key_name: "{{ aws_master_key_name }}" 
+    instance_tags:
+      Name: "{{ master_node_name }}"
+    region: "{{ region }}"
+    vpc_subnet_id: "{{ your_subnet_id }}"
+    state: "present"
+    wait: yes
+  register: kube_master_info
+
+- name: EC2 instance for Kubernetes Slaves 
+  ec2:
+    assign_public_ip: yes
+    count: "{{ slaves_node_count }}"
+    group: "default"
+    image: "{{ ami_id }}" 
+    instance_type: "{{ slaves_instance_type }}"
+    key_name: "{{ aws_slaves_key_name }}" 
+    instance_tags:
+      Name: "{{ slave_nodes_name }}"
+    region: "{{ region }}"
+    vpc_subnet_id: "{{ your_subnet_id }}"
+    state: "present"
+    wait: yes
+  register: kube_slaves_info
+  ignore_errors: yes
+
+- name: Showing the information of launched Kubenetes Master
+  debug:
+    var: kube_master_info
+
+- name: Showing the information of launched Kubenetes Slaves
+  debug:
+    var: kube_slaves_info
